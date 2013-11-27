@@ -12,10 +12,10 @@ public class QueryUtils {
 	public static boolean isSunyReachMember(String firstName, String lastName) {
 		String queryByName1 = 
 		        "PREFIX foaf: <http://xmlns.com/foaf/0.1/> " +
-				"SELECT ?author WHERE { " +
+			"SELECT ?author WHERE { " +
 		        "?author foaf:lastName \"" + lastName + "\" ." +
-				"?author foaf:firstName \"" + firstName + "\" ."+
-				"}";
+			"?author foaf:firstName \"" + firstName + "\" ."+
+			"}";
 		QueryExecution qexec = QueryExecutionFactory.sparqlService(source, QueryFactory.create(queryByName1));
 		ResultSet results = qexec.execSelect();
 		qexec.close();
@@ -23,11 +23,11 @@ public class QueryUtils {
 			return true;
 		} else {
 			String queryByName2 =
-					"PREFIX foaf: <http://xmlns.com/foaf/0.1/> " +
-					"SELECT ?author WHERE { " +
-					"?author foaf:lastName \"" + lastName + "\"^^<http://www.w3.org/2001/XMLSchema#string> ." +
-					"?author foaf:firstName \"" + firstName + "\"^^<http://www.w3.org/2001/XMLSchema#string> ."+
-					"}";	
+				"PREFIX foaf: <http://xmlns.com/foaf/0.1/> " +
+				"SELECT ?author WHERE { " +
+				"?author foaf:lastName \"" + lastName + "\"^^<http://www.w3.org/2001/XMLSchema#string> ." +
+				"?author foaf:firstName \"" + firstName + "\"^^<http://www.w3.org/2001/XMLSchema#string> ."+
+				"}";	
 			qexec = QueryExecutionFactory.sparqlService(source, QueryFactory.create(queryByName2));
 			results = qexec.execSelect();
 			qexec.close();
@@ -40,14 +40,14 @@ public class QueryUtils {
 
 	public static ArrayList<String> queryOrcidId(String orcidId) {
 		String queryByOrcid = 
-				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " + 
+			"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " + 
 		        "PREFIX foaf: <http://xmlns.com/foaf/0.1/> " + 
-				"PREFIX vivo: <http://vivoweb.org/ontology/core#> " +
-			    "SELECT ?pub WHERE { " +
+			"PREFIX vivo: <http://vivoweb.org/ontology/core#> " +
+			"SELECT ?pub WHERE { " +
 		        "?author <http://vivoweb.org/ontology/core#authorInAuthorship> ?authorship ." +
-			    "?resource <http://vivoweb.org/ontology/core#informationResourceInAuthorship> ?authorship ." +
+			"?resource <http://vivoweb.org/ontology/core#informationResourceInAuthorship> ?authorship ." +
 		        "?author vivo:orcidId \"" + orcidId + "\" ." +
-			    "?resource rdfs:label ?pub ."+
+			"?resource rdfs:label ?pub ."+
 		        "}";
 		QueryExecution qexec = QueryExecutionFactory.sparqlService(source, QueryFactory.create(queryByOrcid));
 		ResultSet results = qexec.execSelect();
@@ -64,31 +64,31 @@ public class QueryUtils {
 	public static ArrayList<String> queryName(String firstName, String lastName) {
 		ArrayList<String> pubs = new ArrayList<String>();
 		String queryByName1 = 
-				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " + 
+			"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " + 
 		        "PREFIX foaf: <http://xmlns.com/foaf/0.1/> " + 
-			    "PREFIX vivo: <http://vivoweb.org/ontology/core#> " +
-				"SELECT ?pub WHERE { " +
+			 "PREFIX vivo: <http://vivoweb.org/ontology/core#> " +
+			"SELECT ?pub WHERE { " +
 		        "?author <http://vivoweb.org/ontology/core#authorInAuthorship> ?authorship ." +
-				"?resource <http://vivoweb.org/ontology/core#informationResourceInAuthorship> ?authorship ." +
+			"?resource <http://vivoweb.org/ontology/core#informationResourceInAuthorship> ?authorship ." +
 		        "?author foaf:lastName \"" + lastName + "\" ." +
-				"?author foaf:firstName \"" + firstName + "\" ."+
+			"?author foaf:firstName \"" + firstName + "\" ."+
 		        "?resource rdfs:label ?pub ." +
-				"}";
+			"}";
 		QueryExecution qexec = QueryExecutionFactory.sparqlService(source, QueryFactory.create(queryByName1));
 		ResultSet results = qexec.execSelect();
 		qexec.close();
 		if (!results.hasNext()) {
 			String queryByName2 =
-					"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " + 
-					"PREFIX foaf: <http://xmlns.com/foaf/0.1/> " + 
-					"PREFIX vivo: <http://vivoweb.org/ontology/core#> " +
-					"SELECT ?pub WHERE { " +
-					"?author <http://vivoweb.org/ontology/core#authorInAuthorship> ?authorship ." +
-					"?resource <http://vivoweb.org/ontology/core#informationResourceInAuthorship> ?authorship ." +
-					"?author foaf:lastName \"" + lastName + "\"^^<http://www.w3.org/2001/XMLSchema#string> ." +
-					"?author foaf:firstName \"" + firstName + "\"^^<http://www.w3.org/2001/XMLSchema#string> ."+
-					"?resource rdfs:label ?pub ." +
-					"}";	
+				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " + 
+				"PREFIX foaf: <http://xmlns.com/foaf/0.1/> " + 
+				"PREFIX vivo: <http://vivoweb.org/ontology/core#> " +
+				"SELECT ?pub WHERE { " +
+				"?author <http://vivoweb.org/ontology/core#authorInAuthorship> ?authorship ." +
+				"?resource <http://vivoweb.org/ontology/core#informationResourceInAuthorship> ?authorship ." +
+				"?author foaf:lastName \"" + lastName + "\"^^<http://www.w3.org/2001/XMLSchema#string> ." +
+				"?author foaf:firstName \"" + firstName + "\"^^<http://www.w3.org/2001/XMLSchema#string> ."+
+				"?resource rdfs:label ?pub ." +
+				"}";	
 			qexec = QueryExecutionFactory.sparqlService(source, QueryFactory.create(queryByName2));
 			results = qexec.execSelect();
 			qexec.close();
@@ -103,25 +103,25 @@ public class QueryUtils {
 
 	public static Publication queryPublication(String pub) {
 		String queryDate = 
-				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
+			"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
 		        "PREFIX foaf: <http://xmlns.com/foaf/0.1/> " + 
-				"PREFIX vivo: <http://vivoweb.org/ontology/core#> " +
+			"PREFIX vivo: <http://vivoweb.org/ontology/core#> " +
 		        "SELECT ?year WHERE { " +
-				"?authorship vivo:dateTimeValue ?date ;" +
+			"?authorship vivo:dateTimeValue ?date ;" +
 		        "vivo:informationResourceInAuthorship ?authors ;" +
 		        "rdfs:label \"" + pub + "\" ." +
-				"?date vivo:dateTime ?year ." +
+			"?date vivo:dateTime ?year ." +
 		        "}LIMIT 1";
 		
 		String queryAuthors = 
-				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
+			"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
 		        "PREFIX foaf: <http://xmlns.com/foaf/0.1/> " +
-				"PREFIX vivo: <http://vivoweb.org/ontology/core#> " +
+			"PREFIX vivo: <http://vivoweb.org/ontology/core#> " +
 		        "SELECT ?name WHERE { " + 
-				"?author vivo:authorInAuthorship ?authorship ." +
-				"?resource vivo:informationResourceInAuthorship ?authorship ." +
+			"?author vivo:authorInAuthorship ?authorship ." +
+			"?resource vivo:informationResourceInAuthorship ?authorship ." +
 		        "?author rdfs:label ?name ." +
-				"?resource rdfs:label \"" + pub + "\" ." +
+			"?resource rdfs:label \"" + pub + "\" ." +
 		        "}";
 		
 		QueryExecution qexec1 = QueryExecutionFactory.sparqlService(source, QueryFactory.create(queryDate));
