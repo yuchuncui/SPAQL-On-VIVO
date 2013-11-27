@@ -66,7 +66,7 @@ public class QueryUtils {
 		String queryByName1 = 
 			"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " + 
 		        "PREFIX foaf: <http://xmlns.com/foaf/0.1/> " + 
-			 "PREFIX vivo: <http://vivoweb.org/ontology/core#> " +
+			"PREFIX vivo: <http://vivoweb.org/ontology/core#> " +
 			"SELECT ?pub WHERE { " +
 		        "?author <http://vivoweb.org/ontology/core#authorInAuthorship> ?authorship ." +
 			"?resource <http://vivoweb.org/ontology/core#informationResourceInAuthorship> ?authorship ." +
